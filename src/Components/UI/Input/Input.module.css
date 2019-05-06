@@ -1,0 +1,32 @@
+.InputCon {
+  margin-bottom: 10px;
+}
+.TextArea {
+  resize: none;
+  min-height: 100px;
+}
+
+.Input,
+.TextArea {
+  border-radius: 10px;
+  padding: 5px;
+  width: 80%;
+  font-family: serif;
+  border: 1px solid #999;
+}
+
+.Input:focus,
+.TextArea:focus {
+  outline: none;
+  border: 2px solid rgb(35, 180, 180);
+}
+
+.Label {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #652565;
+  margin-bottom: 5px;
+}
+.Error {
+  border: 1px solid red;
+}

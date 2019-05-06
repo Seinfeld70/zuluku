@@ -1,0 +1,13 @@
+.TextArea {
+  height: 30px;
+  margin-right: 10px;
+  resize: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.Form {
+  display: flex;
+  max-width: 100%;
+  align-items: center;
+}

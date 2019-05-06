@@ -1,0 +1,95 @@
+.PostComponent {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  background-color: #fafafa;
+  border-radius: 10px;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: auto auto auto;
+  grid-gap: 10px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.UserLogo {
+  overflow: hidden;
+  grid-row: 1/4;
+}
+
+.UserLogo img {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.Header .Header_username {
+  font-weight: bold;
+}
+.Header .Header_userId {
+  color: #8c8080;
+}
+.Header_title {
+  margin-top: 8px;
+  margin-bottom: 5px;
+}
+.Content {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+.Content img {
+  width: 100%;
+}
+.Content h4 {
+  margin-top: 0;
+}
+.Footer {
+  color: #6b6868;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  user-select: none;
+}
+.Footer i {
+  cursor: pointer !important;
+  font-size: 1rem;
+}
+.Comments {
+  grid-column: 2/3;
+}
+.Comment {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+  margin: 5px 0;
+}
+.Comment_Avatar {
+  flex-basis: 30px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+}
+.Comment_Avatar img {
+  width: 100%;
+}
+
+.Comment_Header {
+  flex-basis: 100px;
+  flex-shrink: 0;
+  text-overflow: ellipsis;
+  font-size: 1em;
+  font-weight: 600;
+  margin-right: 5px;
+}
+.Comment_body {
+  color: #353232;
+  padding: 5px 10px;
+  background: white;
+  border: 1px solid #9e9d9d;
+  border-radius: 30px;
+}
