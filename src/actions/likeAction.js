@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios";
 import {
   ADD_LIKE,
   REMOVE_LIKE,
@@ -20,7 +20,7 @@ export const addLike = (postId, userId) => {
     try {
       const newData = {};
       const data = await axios.post(
-        `https://sosho-74fef.firebaseio.com/posts/${postId}/likes.json`,
+        `posts/${postId}/likes.json`,
         new Object(userId)
       );
       newData[data.data.name] = userId;
@@ -34,10 +34,7 @@ export const addLike = (postId, userId) => {
 export const removeLike = (postId, likeId) => {
   return async dispatch => {
     try {
-      await axios.delete(
-        `https://sosho-74fef.firebaseio.com/posts/${postId}/likes.json`,
-        likeId
-      );
+      await axios.delete(`posts/${postId}/likes.json`, likeId);
       dispatch(finished(postId, likeId, REMOVE_LIKE));
     } catch (err) {
       console.log(err);
@@ -50,7 +47,7 @@ export const addDislike = (postId, userId) => {
     try {
       const newData = {};
       const data = await axios.post(
-        `https://sosho-74fef.firebaseio.com/posts/${postId}/dislikes.json`,
+        `posts/${postId}/dislikes.json`,
         new Object(userId)
       );
       newData[data.data.name] = userId;
@@ -64,10 +61,7 @@ export const addDislike = (postId, userId) => {
 export const removeDislike = (postId, dislikeId) => {
   return async dispatch => {
     try {
-      await axios.delete(
-        `https://sosho-74fef.firebaseio.com/posts/${postId}/dislikes.json`,
-        dislikeId
-      );
+      await axios.delete(`posts/${postId}/dislikes.json`, dislikeId);
       dispatch(finished(postId, dislikeId, REMOVE_DISLIKE));
     } catch (err) {
       console.log(err);

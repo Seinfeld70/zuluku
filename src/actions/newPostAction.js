@@ -3,13 +3,13 @@ import {
   NEW_POST_FAIL,
   NEW_POST_SUCCESS
 } from "./actionTypes";
-import axios from "axios";
+import axios from "../axios";
 
 export const startNewPost = data => {
   return async dispatch => {
     dispatch(newPostLoading(true));
     try {
-      await axios.post("https://sosho-74fef.firebaseio.com/posts.json", data);
+      await axios.post("posts.json", data);
       dispatch(newPostSuccess(data));
     } catch (err) {
       console.log(err);

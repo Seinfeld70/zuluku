@@ -4,16 +4,13 @@ import {
   NEW_COMMENT_SUCCESS,
   DELETE_COMMENT
 } from "./actionTypes";
-import axios from "axios";
+import axios from "../axios";
 
 export const newComment = (data, postId) => {
   return async dispatch => {
     dispatch(newCommentLoading(true));
     try {
-      await axios.post(
-        `https://sosho-74fef.firebaseio.com/posts/${postId}/comments.json`,
-        data
-      );
+      await axios.post(`posts/${postId}/comments.json`, data);
       dispatch(newCommentSuccess(data, postId));
     } catch (err) {
       console.log(err);
@@ -47,19 +44,17 @@ export const newCommentSuccess = (data, postId) => {
 export const deleteComment = (postId, commentId, userId) => {
   return async dispatch => {
     try {
-      await axios.delete(
-        `https://sosho-74fef.firebaseio.com/posts/${postId}/comments/${commentId}.json`
-      );
-      dispatch(deleteCommentSuccessful(postId, commentId, DELETE_COMMENT));
+      await axios.delete(`posts/${postId}/comments/${commentId}.json`);
+      dispatch(deleteCommentSuccessful(postId, commentId));
     } catch (err) {
       console.log(err);
     }
   };
 };
 
-export const deleteCommentSuccessful = (postId, commentId, type) => {
+export const deleteCommentSuccessful = (postId, commentId) => {
   return {
-    type,
+    type: DELETE_COMMENT,
     payload: {
       postId,
       commentId

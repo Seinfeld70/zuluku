@@ -71,7 +71,7 @@ class CreatePost extends React.Component {
       const newPost = {
         comments: [],
         likes: [],
-        unlikes: [],
+        dislikes: [],
         title: this.state.elements.input.value,
         content: this.state.elements.textarea.value,
         user: {

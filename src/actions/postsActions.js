@@ -4,20 +4,15 @@ import {
   FETCH_POSTS_FAIL
 } from "./actionTypes";
 
-import customAxios from "../axios";
+import axios from "../axios";
 
 export const fetchPosts = () => {
   return async dispatch => {
     dispatch(fetchStart(true));
     try {
-      const posts = await customAxios.get("posts.json");
+      const posts = await axios.get("posts.json");
       dispatch(fetchPostsSuccess(posts.data));
     } catch (err) {
-      // const error = {
-      //   data: err.response.data,
-      //   status: err.response.status,
-      //   statusText: err.response.statusText
-      // };
       console.log(err);
       dispatch(fetchPostsFail(err));
     }
