@@ -6,9 +6,9 @@ export default combineReducers({
   posts: postsReducers,
   currentUser: () => {
     return {
-      name: "Zullu Balti",
-      userName: "zulluBalti",
-      userId: "1a",
+      name: "Jon Doe",
+      userName: "Jon Doe",
+      userId: "2b",
       avatar: "https://source.unsplash.com/random/50x50"
     };
   }

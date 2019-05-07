@@ -1,7 +1,8 @@
 import {
   NEW_COMMENT_LOADING,
   NEW_COMMENT_FAIL,
-  NEW_COMMENT_SUCCESS
+  NEW_COMMENT_SUCCESS,
+  DELETE_COMMENT
 } from "./actionTypes";
 import axios from "axios";
 
@@ -39,6 +40,29 @@ export const newCommentSuccess = (data, postId) => {
     payload: {
       data,
       postId
+    }
+  };
+};
+
+export const deleteComment = (postId, commentId, userId) => {
+  return async dispatch => {
+    try {
+      await axios.delete(
+        `https://sosho-74fef.firebaseio.com/posts/${postId}/comments/${commentId}.json`
+      );
+      dispatch(deleteCommentSuccessful(postId, commentId, DELETE_COMMENT));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const deleteCommentSuccessful = (postId, commentId, type) => {
+  return {
+    type,
+    payload: {
+      postId,
+      commentId
     }
   };
 };

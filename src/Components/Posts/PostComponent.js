@@ -30,7 +30,7 @@ class PostComponent extends React.Component {
         <Footer
           likes={this.props.likes}
           dislikes={this.props.dislikes}
-          comments={this.props.comments.length}
+          comments={this.props.comments}
           showComments={this.onShowComments}
           postId={this.props.postId}
         />

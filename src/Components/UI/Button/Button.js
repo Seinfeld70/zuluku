@@ -10,6 +10,7 @@ const button = props => {
         classes.Btn
       ].join(" ")}
       disabled={props.disabled}
+      onClick={props.onClicked}
     >
       {props.children}
     </button>

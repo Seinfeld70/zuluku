@@ -4,15 +4,13 @@ import {
   FETCH_POSTS_FAIL
 } from "./actionTypes";
 
-import axios from "axios";
+import customAxios from "../axios";
 
 export const fetchPosts = () => {
   return async dispatch => {
     dispatch(fetchStart(true));
     try {
-      const posts = await axios.get(
-        "https://sosho-74fef.firebaseio.com/posts.json"
-      );
+      const posts = await customAxios.get("posts.json");
       dispatch(fetchPostsSuccess(posts.data));
     } catch (err) {
       // const error = {

@@ -11,7 +11,8 @@ import {
   ADD_DISLIKE,
   ADD_LIKE,
   REMOVE_DISLIKE,
-  REMOVE_LIKE
+  REMOVE_LIKE,
+  DELETE_COMMENT
 } from "../actions/actionTypes";
 
 const initalState = {
@@ -90,6 +91,18 @@ const handleRemoveLike = (preState, data, label) => {
   return { ...preState, posts };
 };
 
+const deleteCommentSuccessful = (preState, data) => {
+  const posts = preState.posts.map((post, i) => {
+    if (post.id === data.postId) {
+      post.comments.forEach((cms, j) => {
+        if (cms.id === data.commentId) post.comments.splice(j, 1);
+      });
+    }
+    return post;
+  });
+  return { ...preState, posts };
+};
+
 export const postsReducers = (preState = initalState, action) => {
   switch (action.type) {
     case NEW_COMMENT_LOADING:
@@ -110,6 +123,8 @@ export const postsReducers = (preState = initalState, action) => {
         action.payload.data,
         action.payload.postId
       );
+    case DELETE_COMMENT:
+      return deleteCommentSuccessful(preState, action.payload);
     case ADD_DISLIKE:
       return handleAddLike(preState, action.payload, "dislikes");
     case ADD_LIKE:
