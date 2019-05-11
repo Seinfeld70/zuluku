@@ -30,6 +30,7 @@ class PostComponents extends Component {
           time={p.timeCreated}
           key={p.id}
           postId={p.id}
+          isPostOwner={p.user.userId === this.props.userId}
         />
       ));
     }
@@ -41,7 +42,8 @@ const mapStateToProps = state => {
   return {
     loading: state.posts.loading,
     error: state.posts.error,
-    posts: state.posts.posts
+    posts: state.posts.posts,
+    userId: state.currentUser.userId
   };
 };
 export default connect(

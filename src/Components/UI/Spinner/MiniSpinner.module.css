@@ -1,38 +1,30 @@
-.Spinner {
+.MiniSpinner {
   display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 64px;
-  height: 64px;
-}
-.Spinner::after {
-  content: "Loading ...";
   position: relative;
-  top: 100%;
-  font-size: 10px;
-  margin-left: 8px;
+  width: 32px;
+  height: 32px;
+  align-self: center;
 }
-.Spinner div {
+
+.MiniSpinner div {
   box-sizing: border-box;
   display: block;
   position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #54204d;
+  width: 16px;
+  height: 16px;
+  margin: 3px;
+  border: 3px solid #54204d;
   border-radius: 50%;
   animation: SpinnerLoading 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #54204d transparent transparent transparent;
 }
-.Spinner div:nth-child(1) {
+.MiniSpinner div:nth-child(1) {
   animation-delay: -0.45s;
 }
-.Spinner div:nth-child(2) {
+.MiniSpinner div:nth-child(2) {
   animation-delay: -0.3s;
 }
-.Spinner div:nth-child(3) {
+.MiniSpinner div:nth-child(3) {
   animation-delay: -0.15s;
 }
 @keyframes SpinnerLoading {

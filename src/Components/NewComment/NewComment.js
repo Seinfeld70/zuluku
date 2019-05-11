@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import classes from "../Posts/./PostComponent.module.css";
 import itClasses from "./NewComment.module.css";
 import { newComment } from "../../actions/index";
+import MiniSpinner from "../UI/Spinner/MiniSpinner";
 
 class NewComment extends React.Component {
   state = {
@@ -12,7 +13,8 @@ class NewComment extends React.Component {
       value: "Your Comment...",
       error: true,
       touched: false
-    }
+    },
+    loading: false
   };
   componentWillMount() {
     this.setState({
@@ -35,8 +37,9 @@ class NewComment extends React.Component {
     }
   };
 
-  submitHandler = e => {
+  submitHandler = async e => {
     e.preventDefault();
+    await this.setState({ loading: true });
     if (this.state.textarea.value) {
       // Will dispatch the new Comment Creator action
       const data = {
@@ -46,16 +49,18 @@ class NewComment extends React.Component {
         userId: this.props.userId
       };
       const postId = this.state.postId;
-      this.props.newComment(data, postId);
+      const cmId = await this.props.newComment(data, postId);
+      this.props.addComment(data, cmId);
     } else
       this.setState(preState => ({ textarea: { ...preState, error: true } }));
+    await this.setState({ loading: false });
   };
   render() {
-    let border = "1px solid #aaa";
+    let border = "1px solid #999";
 
     if (this.state.textarea.error && this.state.textarea.touched)
       border = "1px solid red";
-    else border = "1px solid #aaa";
+    else border = "1px solid #999";
 
     return (
       <div className={classes.Comment}>
@@ -66,7 +71,7 @@ class NewComment extends React.Component {
         <form onSubmit={this.submitHandler} className={itClasses.Form}>
           <textarea
             onChange={this.changeValueHandler}
-            style={{ border: border }}
+            style={{ border }}
             className={itClasses.TextArea}
             value={this.state.textarea.value}
             onClick={() =>
@@ -83,6 +88,7 @@ class NewComment extends React.Component {
             Submit
           </Button>
         </form>
+        {this.state.loading ? <MiniSpinner /> : null}
       </div>
     );
   }

@@ -1,5 +1,4 @@
 import {
-  NEW_COMMENT_LOADING,
   NEW_COMMENT_FAIL,
   NEW_COMMENT_SUCCESS,
   DELETE_COMMENT
@@ -8,20 +7,15 @@ import axios from "../axios";
 
 export const newComment = (data, postId) => {
   return async dispatch => {
-    dispatch(newCommentLoading(true));
     try {
-      await axios.post(`posts/${postId}/comments.json`, data);
-      dispatch(newCommentSuccess(data, postId));
+      var newCom = await axios.post(`posts/${postId}/comments.json`, data);
+      dispatch(newCommentSuccess({ id: newCom.data.name, ...data }, postId));
     } catch (err) {
       console.log(err);
       dispatch(newCommentFail(err));
     }
-    dispatch(newCommentLoading(false));
+    return newCom.data.name;
   };
-};
-
-export const newCommentLoading = val => {
-  return { type: NEW_COMMENT_LOADING, payload: val };
 };
 
 export const newCommentFail = err => {

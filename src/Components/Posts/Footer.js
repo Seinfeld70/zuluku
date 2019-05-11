@@ -17,7 +17,6 @@ class Footer extends React.Component {
     dislike: false,
     dislikeNum: null,
     dislikeId: null,
-    comment: false,
     commentNum: null
   };
   componentWillMount() {
@@ -39,7 +38,6 @@ class Footer extends React.Component {
         dislikeId = Object.keys(dislike)[0];
       }
     });
-
     this.setState({
       commentNum: this.props.comments.length,
       likeNum: this.props.likes.length,
@@ -50,6 +48,7 @@ class Footer extends React.Component {
       dislikeId
     });
   }
+
   change = lab => {
     const postId = this.props.postId;
     const userId = this.props.userId;
@@ -119,12 +118,8 @@ class Footer extends React.Component {
           {this.state.dislikeNum}
         </div>
         <div>
-          <i
-            className="fas fa-comment"
-            style={{ color: this.state.comment ? "#ccc" : "" }}
-            onClick={this.props.showComments}
-          />{" "}
-          {this.state.commentNum}
+          <i className="fas fa-comment" onClick={this.props.showComments} />{" "}
+          {this.props.commentsLength}
         </div>
       </div>
     );

@@ -1,13 +1,17 @@
 .TextArea {
-  height: 30px;
+  flex-grow: 3;
   margin-right: 10px;
   resize: none;
   border-radius: 5px;
   padding: 5px;
 }
+.TextArea:focus {
+  outline: none;
+  border: 1px solid rgb(28, 95, 95);
+}
 
 .Form {
   display: flex;
-  max-width: 100%;
   align-items: center;
+  flex-grow: 3;
 }

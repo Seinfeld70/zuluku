@@ -1,13 +1,8 @@
-import {
-  NEW_POST_LOADING,
-  NEW_POST_FAIL,
-  NEW_POST_SUCCESS
-} from "./actionTypes";
+import { NEW_POST_FAIL, NEW_POST_SUCCESS } from "./actionTypes";
 import axios from "../axios";
 
 export const startNewPost = data => {
   return async dispatch => {
-    dispatch(newPostLoading(true));
     try {
       await axios.post("posts.json", data);
       dispatch(newPostSuccess(data));
@@ -15,15 +10,6 @@ export const startNewPost = data => {
       console.log(err);
       dispatch(newPostFail(err));
     }
-
-    dispatch(newPostLoading(false));
-  };
-};
-
-export const newPostLoading = val => {
-  return {
-    type: NEW_POST_LOADING,
-    payload: val
   };
 };
 

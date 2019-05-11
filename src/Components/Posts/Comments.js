@@ -14,15 +14,25 @@ class Comments extends React.Component {
     this.setState({
       comments: [...this.props.allComments]
     });
+    this.props.getCommentLength(this.props.allComments.length);
   }
-  deleteComment = commentId => {
-    this.props.deleteComment(
+  deleteComment = async commentId => {
+    await this.props.deleteComment(
       this.props.postId,
       commentId,
       this.props.currentUserId
     );
     const comments = this.state.comments.filter(c => c.id !== commentId);
-    this.setState({ comments });
+    this.setState({ comments: [...comments] });
+    this.props.getCommentLength(comments.length);
+    return false;
+  };
+  onAddComment = (comment, id) => {
+    const data = { ...comment, id };
+    const preState = [...this.state.comments];
+    preState.unshift(data);
+    this.setState({ comments: [...preState] });
+    this.props.getCommentLength(preState.length);
   };
   render() {
     let comments = [];
@@ -36,7 +46,7 @@ class Comments extends React.Component {
           isOwner={comment.userId === this.props.currentUserId}
           key={i}
           onDeleteComment={() => {
-            this.deleteComment(comment.id);
+            return this.deleteComment(comment.id);
           }}
         />
       ));
@@ -44,7 +54,7 @@ class Comments extends React.Component {
 
     return (
       <div className={classes.Comments}>
-        <NewComment postId={this.props.postId} />
+        <NewComment postId={this.props.postId} addComment={this.onAddComment} />
         {comments}
       </div>
     );

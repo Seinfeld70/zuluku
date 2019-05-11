@@ -1,4 +1,5 @@
 .PostComponent {
+  position: relative;
   width: 100%;
   max-width: 600px;
   margin: auto;
@@ -24,11 +25,26 @@
   width: 100%;
 }
 
+.Header {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.Header .Header_Meta {
+  align-self: center;
+}
 .Header .Header_username {
   font-weight: bold;
 }
 .Header .Header_userId {
   color: #8c8080;
+  display: none;
+}
+@media (min-width: 550px) {
+  .Header .Header_userId {
+    display: inline;
+  }
 }
 .Header_title {
   margin-top: 8px;
@@ -76,15 +92,17 @@
 }
 .Comment_Avatar img {
   width: 100%;
+  border-radius: 50%;
 }
 
 .Comment_Header {
-  flex-basis: 100px;
-  flex-shrink: 0;
+  max-width: 100px;
+  flex-shrink: 1;
   text-overflow: ellipsis;
   font-size: 1em;
   font-weight: 600;
   margin-right: 5px;
+  margin-top: 3px;
 }
 .Comment_body {
   margin-right: 10px;

@@ -2,17 +2,16 @@ import {
   FETCH_POSTS_LOADING,
   FETCH_POSTS_FAIL,
   FETCH_POSTS_SUCCESS,
-  NEW_POST_LOADING,
   NEW_POST_FAIL,
   NEW_POST_SUCCESS,
-  NEW_COMMENT_LOADING,
   NEW_COMMENT_FAIL,
   NEW_COMMENT_SUCCESS,
   ADD_DISLIKE,
   ADD_LIKE,
   REMOVE_DISLIKE,
   REMOVE_LIKE,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  DELETE_POST
 } from "../actions/actionTypes";
 
 const initalState = {
@@ -92,7 +91,7 @@ const handleRemoveLike = (preState, data, label) => {
 };
 
 const deleteCommentSuccessful = (preState, data) => {
-  const posts = preState.posts.map((post, i) => {
+  const posts = preState.posts.map(post => {
     if (post.id === data.postId) {
       post.comments.forEach((cms, j) => {
         if (cms.id === data.commentId) post.comments.splice(j, 1);
@@ -100,13 +99,15 @@ const deleteCommentSuccessful = (preState, data) => {
     }
     return post;
   });
-  return { ...preState, posts };
+  return { ...preState, posts: [...posts] };
 };
 
+const handleDeletePost = (preState, postId) => {
+  const posts = preState.posts.filter(post => post.id !== postId);
+  return { ...preState, posts };
+};
 export const postsReducers = (preState = initalState, action) => {
   switch (action.type) {
-    case NEW_COMMENT_LOADING:
-    case NEW_POST_LOADING:
     case FETCH_POSTS_LOADING:
       return { ...preState, loading: action.payload };
     case FETCH_POSTS_FAIL:
@@ -133,6 +134,8 @@ export const postsReducers = (preState = initalState, action) => {
       return handleRemoveLike(preState, action.payload, "dislikes");
     case REMOVE_LIKE:
       return handleRemoveLike(preState, action.payload, "likes");
+    case DELETE_POST:
+      return handleDeletePost(preState, action.payload);
     default:
       return preState;
   }

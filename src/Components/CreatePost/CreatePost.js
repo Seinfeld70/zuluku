@@ -3,6 +3,9 @@ import React from "react";
 import Button from "../UI/Button/Button";
 import INPUT from "../UI/Input/Input";
 import classes from "./CretePost.module.css";
+import Spinner from "../UI/Spinner/Spinner";
+import Modal from "../UI/Modal/Modal";
+import Aux from "../../Hoc/MyAux";
 
 import { connect } from "react-redux";
 import { startNewPost } from "../../actions/index";
@@ -22,7 +25,7 @@ const months = [
   "DEC"
 ];
 
-const days = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
 class CreatePost extends React.Component {
   state = {
@@ -42,7 +45,8 @@ class CreatePost extends React.Component {
         touched: false
       }
     },
-    errors: false
+    errors: false,
+    loading: false
   };
   onValueChange(label, value) {
     const updatedState = this.state.elements;
@@ -60,8 +64,9 @@ class CreatePost extends React.Component {
     } else error = false;
     return error;
   };
-  onSubmitHandler(e) {
+  async onSubmitHandler(e) {
     e.preventDefault();
+    await this.setState({ loading: true });
     let error = false;
     error = this.checker("textarea", this.state.elements.textarea.value);
     error = error
@@ -85,8 +90,9 @@ class CreatePost extends React.Component {
         } ${new Date().getFullYear()}`
       };
 
-      this.props.newPost(newPost);
+      await this.props.newPost(newPost);
     }
+    this.setState({ loading: false });
   }
   onTextAreaClicked = () => {
     this.setState(preState => {
@@ -138,6 +144,12 @@ class CreatePost extends React.Component {
           />
           <Button type="Success">Post</Button>
         </form>
+        {this.state.loading ? (
+          <Aux>
+            <Modal />
+            <Spinner />
+          </Aux>
+        ) : null}
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from "react";
 
 import classes from "./PostComponent.module.css";
+import Button from "../UI/Button/Button";
 
 const header = props => (
   <div className={classes.Header}>
@@ -10,7 +11,11 @@ const header = props => (
         {props.userName} {" - "} {props.time}
       </span>
     </div>
-    <div className={classes.author}>{props.author}</div>
+    {props.isPostOwner ? (
+      <Button type="Danger" onClicked={props.postDelete}>
+        Delete
+      </Button>
+    ) : null}
   </div>
 );
 
