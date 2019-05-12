@@ -86,17 +86,6 @@ class Footer extends React.Component {
     }
 
     this.setState({ ...preState });
-
-    // this.setState(pre => {
-    //   const state = pre[lab];
-    //   let updatedNum = pre[lab + "Num"];
-    //   if (state) updatedNum--;
-    //   else updatedNum++;
-    //   return {
-    //     [lab]: !state,
-    //     [lab + "Num"]: updatedNum
-    //   };
-    // });
   };
   render() {
     return (

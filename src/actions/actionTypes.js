@@ -18,3 +18,9 @@ export const REMOVE_LIKE = "REMOVE_LIKE";
 
 export const ADD_DISLIKE = "ADD_DISLIKE";
 export const REMOVE_DISLIKE = "REMOVE_DISLIKE";
+
+// Users
+
+export const FETCH_USERS_LOADING = "FETCH_USERS_LOADING";
+export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
+export const FETCH_USERS_FAIL = "FETCH_USERS_FAIL";

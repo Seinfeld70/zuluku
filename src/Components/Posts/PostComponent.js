@@ -26,34 +26,37 @@ class PostComponent extends React.Component {
     await this.props.deletePost(id);
     await this.setState({ loading: false });
   };
+  componentWillUnmount() {}
   render() {
+    const post = this.props.post;
+    const user = post.user;
     return (
       <div className={classes.PostComponent}>
-        <UserLogo src={this.props.avatar} alt="profile pic" />
+        <UserLogo src={user.avatar} alt="profile pic" />
         <Header
-          name={this.props.user}
-          userName={this.props.userName}
-          time={this.props.time}
-          title={this.props.title}
-          isPostOwner={this.props.isPostOwner}
+          name={user.name}
+          userName={user.userName}
+          time={post.timeCreated}
+          title={post.title}
+          isPostOwner={user.userId === this.props.userId}
           postDelete={() => {
-            this.onDeletePost(this.props.postId);
+            this.onDeletePost(post.id);
           }}
         />
-        <Content title={this.props.title} body={this.props.content} />
+        <Content title={post.title} body={post.content} />
         <Footer
-          likes={this.props.likes}
-          dislikes={this.props.dislikes}
-          comments={this.props.comments}
+          likes={post.likes}
+          dislikes={post.dislikes}
+          comments={post.comments}
           commentsLength={this.state.commentsLength}
           showComments={this.onShowComments}
-          postId={this.props.postId}
+          postId={post.id}
         />
         <Comments
-          allComments={this.props.comments}
+          allComments={post.comments}
           getCommentLength={size => this.setState({ commentsLength: size })}
           show={this.state.commentsShow}
-          postId={this.props.postId}
+          postId={post.id}
         />
         {this.state.loading ? (
           <Aux>
@@ -66,7 +69,13 @@ class PostComponent extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    userId: state.currentUser.userId
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { deletePost }
 )(PostComponent);

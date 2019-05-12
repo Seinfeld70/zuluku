@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PostComponent from "../Components/Posts/PostComponent";
 import Spinner from "../Components/UI/Spinner/Spinner";
 import Modal from "../Components/UI/Modal/Modal";
+import CreatePost from "../Components/CreatePost/CreatePost";
 
 import { fetchPosts } from "../actions/index";
 
@@ -17,24 +18,16 @@ class PostComponents extends Component {
       posts.push(<Modal key="1" />);
       posts.push(<Spinner key="2" />);
     } else {
-      posts = this.props.posts.map(p => (
-        <PostComponent
-          title={p.title}
-          content={p.content}
-          userName={p.user.userName}
-          user={p.user.name}
-          avatar={p.user.avatar}
-          likes={p.likes}
-          dislikes={p.dislikes}
-          comments={p.comments}
-          time={p.timeCreated}
-          key={p.id}
-          postId={p.id}
-          isPostOwner={p.user.userId === this.props.userId}
-        />
+      posts = this.props.posts.map(post => (
+        <PostComponent post={post} key={post.id} />
       ));
     }
-    return <div>{posts}</div>;
+    return (
+      <div>
+        <CreatePost />
+        {posts}
+      </div>
+    );
   }
 }
 
@@ -42,8 +35,7 @@ const mapStateToProps = state => {
   return {
     loading: state.posts.loading,
     error: state.posts.error,
-    posts: state.posts.posts,
-    userId: state.currentUser.userId
+    posts: state.posts.posts
   };
 };
 export default connect(

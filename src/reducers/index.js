@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 
 import { postsReducers } from "./postsReducers";
+import usersReducers from "./usersReducers";
 
 export default combineReducers({
   posts: postsReducers,
@@ -11,5 +12,6 @@ export default combineReducers({
       userId: "2b",
       avatar: "https://source.unsplash.com/random/50x50"
     };
-  }
+  },
+  users: usersReducers
 });
