@@ -1,0 +1,34 @@
+.Header {
+  background: #a50abf;
+  color: #ececec;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.ListItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.ListItems li {
+  margin-left: 10px;
+}
+.ListItems li a {
+  background: #660e75;
+  padding: 8px 10px;
+  border-radius: 5px;
+}
+.ListItems li a {
+  color: inherit;
+  text-decoration: none;
+}
+.ListItems li a:hover,
+.ListItems li a:active {
+  background: #da0dfd;
+  color: #0a0909;
+}

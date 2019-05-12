@@ -1,0 +1,35 @@
+.User {
+  display: grid;
+  grid-template-columns: 50px 1fr;
+  grid-template-rows: 30px 20px;
+  grid-column-gap: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #aaa;
+  padding: 10px;
+  background: #00000009;
+  cursor: pointer;
+}
+.User:hover,
+.User:active {
+  background: #00000028;
+}
+.Logo {
+  grid-area: 1 / 1/ 3/ 2;
+  border-radius: 50%;
+}
+.Info {
+  display: flex;
+  justify-content: space-between;
+}
+.Info h3 {
+  margin-top: 0;
+}
+.Gray {
+  color: #555;
+}
+@media (max-width: 400px) {
+  .OnlyDesktop {
+    display: none;
+  }
+}
