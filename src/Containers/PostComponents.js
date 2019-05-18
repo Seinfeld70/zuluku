@@ -24,7 +24,7 @@ class PostComponents extends Component {
     }
     return (
       <div>
-        <CreatePost />
+        {this.props.isSignIn ? <CreatePost /> : null}
         {posts}
       </div>
     );
@@ -35,7 +35,9 @@ const mapStateToProps = state => {
   return {
     loading: state.posts.loading,
     error: state.posts.error,
-    posts: state.posts.posts
+    posts: state.posts.posts,
+    currentUser: state.currentUser.userData,
+    isSignIn: state.currentUser.signIn
   };
 };
 export default connect(

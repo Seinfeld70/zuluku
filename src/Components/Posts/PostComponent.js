@@ -32,13 +32,12 @@ class PostComponent extends React.Component {
     const user = post.user;
     return (
       <div className={classes.PostComponent}>
-        <UserLogo src={user.avatar} alt="profile pic" />
+        <UserLogo src={user.photoUrl} alt="profile pic" />
         <Header
-          name={user.name}
-          userName={user.userName}
+          name={user.fullName}
           time={post.timeCreated}
           title={post.title}
-          isPostOwner={user.userId === this.props.userId}
+          isPostOwner={user.localId === this.props.localId}
           postDelete={() => {
             this.onDeletePost(post.id);
           }}
@@ -71,7 +70,7 @@ class PostComponent extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    userId: state.currentUser.userId
+    localId: state.currentUser.userData.localId
   };
 };
 

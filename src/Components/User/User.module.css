@@ -15,21 +15,15 @@
   background: #00000028;
 }
 .Logo {
+  border: 1px solid #aaa;
+  width: 50px;
+  height: 50px;
   grid-area: 1 / 1/ 3/ 2;
   border-radius: 50%;
 }
-.Info {
-  display: flex;
-  justify-content: space-between;
-}
-.Info h3 {
+h3 {
   margin-top: 0;
 }
 .Gray {
   color: #555;
-}
-@media (max-width: 400px) {
-  .OnlyDesktop {
-    display: none;
-  }
 }

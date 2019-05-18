@@ -21,12 +21,14 @@ const input = props => {
     default:
       markup = (
         <input
-          type="text"
+          type={props.type || "input"}
           className={[classes.Input, props.error() ? classes.Error : null].join(
             " "
           )}
           placeholder={props.placeholder}
-          onChange={e => props.onValueChange("input", e.target.value)}
+          onChange={e =>
+            props.onValueChange(props.type || "input", e.target.value)
+          }
           value={props.value}
         />
       );
@@ -36,9 +38,7 @@ const input = props => {
     <div className={classes.InputCon}>
       <div className={classes.Label}>{props.label}</div>
       {markup}
-      <div style={{ color: "red" }}>
-        {props.error() ? "This field can't be empty." : null}
-      </div>
+      <div style={{ color: "red" }}>{props.error()}</div>
     </div>
   );
 };

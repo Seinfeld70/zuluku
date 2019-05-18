@@ -24,7 +24,7 @@ class Footer extends React.Component {
     let likeId, dislikeId;
 
     this.props.likes.forEach(like => {
-      if (like[Object.keys(like)[0]] === this.props.userId) {
+      if (like[Object.keys(like)[0]] === this.props.localId) {
         status.like = true;
         status.dislike = false;
         likeId = Object.keys(like)[0];
@@ -32,7 +32,7 @@ class Footer extends React.Component {
     });
 
     this.props.dislikes.forEach(dislike => {
-      if (dislike[Object.keys(dislike)[0]] === this.props.userId) {
+      if (dislike[Object.keys(dislike)[0]] === this.props.localId) {
         status.dislike = true;
         status.like = false;
         dislikeId = Object.keys(dislike)[0];
@@ -50,42 +50,45 @@ class Footer extends React.Component {
   }
 
   change = lab => {
-    const postId = this.props.postId;
-    const userId = this.props.userId;
-    const likeId = this.state.likeId;
-    const dislikeId = this.state.dislikeId;
+    const isSignIn = this.props.isSignIn;
+    const userId = this.props.localId;
+    if (isSignIn) {
+      const postId = this.props.postId;
+      const likeId = this.state.likeId;
+      const dislikeId = this.state.dislikeId;
 
-    const preState = { ...this.state };
+      const preState = { ...this.state };
 
-    if (this.state.like && lab === "like") {
-      this.props.removeLike(postId, likeId);
-      preState.like = false;
-      preState.likeNum--;
-    } else if (!this.state.like && lab === "like") {
-      this.props.addLike(postId, userId);
-      if (this.state.dislike) {
+      if (this.state.like && lab === "like") {
+        this.props.removeLike(postId, likeId);
+        preState.like = false;
+        preState.likeNum--;
+      } else if (!this.state.like && lab === "like") {
+        this.props.addLike(postId, userId);
+        if (this.state.dislike) {
+          this.props.removeDislike(postId, dislikeId);
+          preState.dislike = false;
+          preState.dislikeNum--;
+        }
+        preState.like = true;
+        preState.likeNum++;
+      } else if (!this.state.dislike && lab === "dislike") {
+        this.props.addDislike(postId, userId);
+        if (this.state.like) {
+          this.props.removeLike(postId, likeId);
+          preState.like = false;
+          preState.likeNum--;
+        }
+        preState.dislike = true;
+        preState.dislikeNum++;
+      } else if (this.state.dislike && lab === "dislike") {
         this.props.removeDislike(postId, dislikeId);
         preState.dislike = false;
         preState.dislikeNum--;
       }
-      preState.like = true;
-      preState.likeNum++;
-    } else if (!this.state.dislike && lab === "dislike") {
-      this.props.addDislike(postId, userId);
-      if (this.state.like) {
-        this.props.removeLike(postId, likeId);
-        preState.like = false;
-        preState.likeNum--;
-      }
-      preState.dislike = true;
-      preState.dislikeNum++;
-    } else if (this.state.dislike && lab === "dislike") {
-      this.props.removeDislike(postId, dislikeId);
-      preState.dislike = false;
-      preState.dislikeNum--;
-    }
 
-    this.setState({ ...preState });
+      this.setState({ ...preState });
+    }
   };
   render() {
     return (
@@ -116,7 +119,8 @@ class Footer extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  userId: state.currentUser.userId
+  localId: state.currentUser.userData.localId,
+  isSignIn: state.currentUser.signIn
 });
 export default connect(
   mapStateToProps,

@@ -80,10 +80,9 @@ class CreatePost extends React.Component {
         title: this.state.elements.input.value,
         content: this.state.elements.textarea.value,
         user: {
-          avatar: this.props.currentUser.avatar,
-          userId: this.props.currentUser.userId,
-          name: this.props.currentUser.name,
-          userName: this.props.currentUser.userName
+          photoUrl: this.props.currentUser.photoUrl,
+          localId: this.props.currentUser.localId,
+          fullName: this.props.currentUser.fullName
         },
         timeCreated: `${days[new Date().getDay()]} ${
           months[new Date().getMonth()]
@@ -157,7 +156,7 @@ class CreatePost extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    currentUser: state.currentUser.userData
   };
 };
 

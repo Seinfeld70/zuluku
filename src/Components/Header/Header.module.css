@@ -6,6 +6,7 @@
   align-items: center;
   margin-bottom: 10px;
   padding: 10px;
+  min-height: 40px;
 }
 .ListItems {
   list-style: none;
@@ -14,21 +15,48 @@
   flex-grow: 2;
   display: flex;
   flex-direction: row-reverse;
+  align-items: center;
 }
 .ListItems li {
   margin-left: 10px;
 }
-.ListItems li a {
+.ListItems li a,
+.ListItems li button {
   background: #660e75;
   padding: 8px 10px;
   border-radius: 5px;
-}
-.ListItems li a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
+}
+.ListItems li button {
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #f79b9b;
+  font-weight: bold;
 }
 .ListItems li a:hover,
 .ListItems li a:active {
   background: #da0dfd;
   color: #0a0909;
+}
+
+.ListItems .Google {
+  background: #027b02;
+  color: white;
+}
+.ListItems .Google:hover,
+.ListItems .Google:active {
+  background: #036f03;
+  color: white;
+}
+
+.ListItems .Logout {
+  background: #b30101;
+  color: white;
+}
+.ListItems .Logout:hover,
+.ListItems .Logout:active {
+  background: #990101;
 }

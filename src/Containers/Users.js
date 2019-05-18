@@ -24,7 +24,7 @@ class Users extends React.Component {
       );
     } else if (this.props.users.users.length > 0) {
       result = this.props.users.users.map(user => (
-        <User info={user} key={user.userId} />
+        <User info={user} key={user.localId} />
       ));
     } else if (this.props.users.error) {
       result = <p style={{ color: "#ee9230" }}>Something went Wrong</p>;

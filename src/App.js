@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import PostComponents from "./Containers/PostComponents";
-import Header from "./Components/Header/Header";
 import Users from "./Containers/Users";
+import Header from "./Components/Header/Header";
 import "./App.module.css";
 
 class App extends React.Component {

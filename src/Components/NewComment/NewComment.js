@@ -43,10 +43,10 @@ class NewComment extends React.Component {
     if (this.state.textarea.value) {
       // Will dispatch the new Comment Creator action
       const data = {
-        avatar: this.props.avatar,
+        photoUrl: this.props.user.photoUrl,
         content: this.state.textarea.value,
-        name: this.props.name,
-        userId: this.props.userId
+        fullName: this.props.user.fullName,
+        localId: this.props.user.localId
       };
       const postId = this.state.postId;
       const cmId = await this.props.newComment(data, postId);
@@ -65,9 +65,9 @@ class NewComment extends React.Component {
     return (
       <div className={classes.Comment}>
         <div className={classes.Comment_Avatar}>
-          <img src={this.props.avatar} alt="profile pic" />
+          <img src={this.props.user.photoUrl} alt="profile pic" />
         </div>
-        <div className={classes.Comment_Header}>{this.props.name}</div>
+        <div className={classes.Comment_Header}>{this.props.user.FullName}</div>
         <form onSubmit={this.submitHandler} className={itClasses.Form}>
           <textarea
             onChange={this.changeValueHandler}
@@ -95,9 +95,7 @@ class NewComment extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  avatar: state.currentUser.avatar,
-  name: state.currentUser.name,
-  userId: state.currentUser.userId
+  user: state.currentUser.userData
 });
 
 export default connect(

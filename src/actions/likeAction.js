@@ -21,6 +21,7 @@ export const addLike = (postId, userId) => {
       const newData = {};
       const data = await axios.post(
         `posts/${postId}/likes.json`,
+        // eslint-disable-next-line
         new Object(userId)
       );
       newData[data.data.name] = userId;
@@ -48,6 +49,7 @@ export const addDislike = (postId, userId) => {
       const newData = {};
       const data = await axios.post(
         `posts/${postId}/dislikes.json`,
+        // eslint-disable-next-line
         new Object(userId)
       );
       newData[data.data.name] = userId;

@@ -20,7 +20,7 @@ class Comments extends React.Component {
     await this.props.deleteComment(
       this.props.postId,
       commentId,
-      this.props.currentUserId
+      this.props.localId
     );
     const comments = this.state.comments.filter(c => c.id !== commentId);
     this.setState({ comments: [...comments] });
@@ -39,11 +39,11 @@ class Comments extends React.Component {
     if (this.state.comments.length > 0) {
       comments = this.state.comments.map((comment, i) => (
         <Comment
-          commentAvatar={comment.avatar}
-          name={comment.name}
+          commentAvatar={comment.photoUrl}
+          name={comment.fullName}
           comment={comment.content}
           show={i === 0 ? true : this.props.show}
-          isOwner={comment.userId === this.props.currentUserId}
+          isOwner={comment.localId === this.props.localId}
           key={i}
           onDeleteComment={() => {
             return this.deleteComment(comment.id);
@@ -54,7 +54,12 @@ class Comments extends React.Component {
 
     return (
       <div className={classes.Comments}>
-        <NewComment postId={this.props.postId} addComment={this.onAddComment} />
+        {this.props.isSignIn ? (
+          <NewComment
+            postId={this.props.postId}
+            addComment={this.onAddComment}
+          />
+        ) : null}
         {comments}
       </div>
     );
@@ -62,7 +67,8 @@ class Comments extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  currentUserId: state.currentUser.userId
+  localId: state.currentUser.userData.localId,
+  isSignIn: state.currentUser.signIn
 });
 
 export default connect(
