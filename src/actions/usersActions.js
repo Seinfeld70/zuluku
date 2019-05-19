@@ -93,7 +93,7 @@ export const authUser = () => {
 
         const authData = {
           // develpment requestUri: "http://localhost",
-          requestUri: "https://sosho-74fef.firebaseapp.com/", // deployment
+          requestUri: "https://sosho-74fef.firebaseapp.com", // deployment
           postBody: `id_token=${clientId}&providerId=google.com`,
           returnIdpCredential: true,
           returnSecureToken: true

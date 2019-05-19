@@ -26,4 +26,11 @@ h3 {
 }
 .Gray {
   color: #555;
+  height: 20px;
+  font-size: 0.8rem;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.Gray::-webkit-scrollbar {
+  height: 2px;
 }
