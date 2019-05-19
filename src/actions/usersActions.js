@@ -6,7 +6,8 @@ import {
   USER_LOG_OUT,
   AUTH_USER,
   AUTH_USER_LOADING,
-  AUTH_USER_FAIL
+  AUTH_USER_FAIL,
+  CHECK_LOG_IN
 } from "./actionTypes";
 import axios from "axios";
 
@@ -48,13 +49,13 @@ export const fetchUsersFail = error => {
 };
 
 export const userLogOut = () => {
-  // localStorage.removeItem('') TODO:
   return {
     type: USER_LOG_OUT
   };
 };
 
 export const authSuccess = authData => {
+  for (let keys in authData) localStorage.setItem(keys, authData[keys]);
   return {
     type: AUTH_USER,
     payload: authData
@@ -78,7 +79,7 @@ export const authUser = () => {
     try {
       let clientId =
         "768166891189-59aoqa4qmq6gnhq42mrh13klmo1k0m43.apps.googleusercontent.com";
-      const clientSecretId = "VA__A8qWFUduy3i0PNZIA0My";
+      // const clientSecretId = "VA__A8qWFUduy3i0PNZIA0My";
 
       window.gapi.load("client: auth2", async () => {
         console.log("after cient: ", window.gapi);
@@ -122,5 +123,11 @@ export const authUser = () => {
     } catch (err) {
       console.log(err);
     }
+  };
+};
+
+export const checkUserLogin = () => {
+  return {
+    type: CHECK_LOG_IN
   };
 };

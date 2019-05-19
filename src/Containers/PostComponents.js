@@ -5,10 +5,14 @@ import PostComponent from "../Components/Posts/PostComponent";
 import Spinner from "../Components/UI/Spinner/Spinner";
 import Modal from "../Components/UI/Modal/Modal";
 import CreatePost from "../Components/CreatePost/CreatePost";
+import classes from "../App.module.css";
 
-import { fetchPosts } from "../actions/index";
+import { fetchPosts, checkUserLogin } from "../actions/index";
 
 class PostComponents extends Component {
+  componentWillMount() {
+    this.props.checkUserLogin();
+  }
   componentDidMount() {
     this.props.fetchPosts();
   }
@@ -23,7 +27,7 @@ class PostComponents extends Component {
       ));
     }
     return (
-      <div>
+      <div className={classes.PostComponents}>
         {this.props.isSignIn ? <CreatePost /> : null}
         {posts}
       </div>
@@ -43,6 +47,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    fetchPosts
+    fetchPosts,
+    checkUserLogin
   }
 )(PostComponents);

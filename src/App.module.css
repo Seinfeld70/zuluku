@@ -4,6 +4,14 @@ body {
 }
 
 .Users {
-  max-width: 600px;
+  max-width: 700px;
+  width: 95%;
   margin: 0 auto;
+}
+
+.PostComponents {
+  width: 95%;
+  margin: 0 auto;
+  max-width: 700px;
+  overflow: hidden;
 }

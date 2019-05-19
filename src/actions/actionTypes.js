@@ -29,3 +29,5 @@ export const USER_LOG_OUT = "USER_LOG_OUT";
 export const AUTH_USER = "AUTH_USER";
 export const AUTH_USER_LOADING = "AUTH_USER_LOADING";
 export const AUTH_USER_FAIL = "AUTH_USER_FAIL";
+
+export const CHECK_LOG_IN = "CHECK_LOG_IN";

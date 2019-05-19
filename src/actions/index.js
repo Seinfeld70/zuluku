@@ -5,4 +5,9 @@ export { addLike, removeLike, addDislike, removeDislike } from "./likeAction";
 
 // Users
 
-export { fetchUsers, userLogOut, authUser } from "./usersActions";
+export {
+  fetchUsers,
+  userLogOut,
+  authUser,
+  checkUserLogin
+} from "./usersActions";
