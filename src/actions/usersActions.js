@@ -92,7 +92,8 @@ export const authUser = () => {
         clientId = userData.Zi.id_token;
 
         const authData = {
-          requestUri: "http://localhost",
+          // develpment requestUri: "http://localhost",
+          requestUri: "https://sosho-74fef.firebaseapp.com/", // deployment
           postBody: `id_token=${clientId}&providerId=google.com`,
           returnIdpCredential: true,
           returnSecureToken: true
